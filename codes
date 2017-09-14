@@ -1,0 +1,18 @@
+
+# bgzip all previous .vcf and index them properly
+nohup zcat ChineseForPRS.vcf.gz | bgzip -c > ChineseForPRS.new.vcf.gz && tabix ChineseForPRS.new.vcf.gz &
+nohup zcat MalayForPRS.vcf.gz | bgzip -c > MalayForPRS.new.vcf.gz && tabix MalayForPRS.new.vcf.gz &
+nohup zcat IndianForPRS.vcf.gz | bgzip -c > IndianForPRS.new.vcf.gz && tabix IndianForPRS.new.vcf.gz &
+
+
+# combine all ethnicities into 1 file
+bcftools merge --threads 25 -Oz ChineseForPRS.new.vcf.gz MalayForPRS.new.vcf.gz IndianForPRS.new.vcf.gz > AllEthnic.vcf.gz
+
+# prepare Mother and Child sample file: MADE SURE ^M IS KEYED IN USING CTRL V + CTRL M
+# Each ID will be in a separate line
+sed 's/^M/\n/g' ChildSample.txt > ChildSampleD.txt
+sed 's/^M/\n/g' MotherSample.txt > MotherSampleD.txt
+
+# Extract Mother and Child into separate .vcf files
+nohup bcftools view --threads 25 -Oz -S MotherSampleD.txt AllEthnic.vcf.gz > AllEthnic_Mothers.vcf.gz &
+nohup bcftools view --threads 25 -Oz -S ChildSampleD.txt AllEthnic.vcf.gz > AllEthnic_Child.vcf.gz &
