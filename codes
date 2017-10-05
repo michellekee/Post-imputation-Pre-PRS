@@ -20,4 +20,13 @@ nohup bcftools view --threads 25 -Oz -S ChildSampleD.txt AllEthnic.vcf.gz > AllE
 nohup plink --vcf AllEthnic_Child.vcf --make-bed --out AllEthnic_Child &
 nohup plink --vcf AllEthnic_Mothers.vcf --make-bed --out AllEthnic_Mothers &
 
-# Use plink to 
+# Use plink to filter for MAF of 5% and LD prunning for child and mothers
+plink --bfile AllEthnic_Child --maf 0.05 --make-bed --out AllEthnic_Child_maf05
+plink --bfile AllEthnic_Child_maf05 --indep-pairwise 50 5 0.2 --out AllEthnic_Child_maf05.indeppair
+plink --bfile AllEthnic_Child_maf05 --extract AllEthnic_Child_maf05.indeppair.prune.in --make-bed --out AllEthnic_Child_maf05_pruned
+
+plink --bfile AllEthnic_Mothers --maf 0.05 --make-bed --out AllEthnic_Mothers_maf05
+plink --bfile AllEthnic_Mothers_maf05 --indep-pairwise 50 5 0.2 --out AllEthnic_Mothers_maf05.indeppair
+plink --bfile AllEthnic_Mothers_maf05 --extract AllEthnic_Mothers_maf05.indeppair.prune.in --make-bed --out AllEthnic_Mothers_maf05_pruned
+
+# You may now continue to run smartpca protocol.
