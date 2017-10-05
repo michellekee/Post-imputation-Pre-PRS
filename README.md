@@ -1,4 +1,4 @@
-# Pre-PRS
+# Post-imputation checklist before running PRS:
 
 Steps to do post-imputation but before running PRS:
   1) Combine all ethinicity .vcf files into 1
