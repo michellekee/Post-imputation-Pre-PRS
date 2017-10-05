@@ -1,0 +1,11 @@
+# Smartpca protocol.
+
+# Edit run_smartpca.bash as needed, then run script.
+sudo ./run_smartpca.bash ~/Directory-where-prev-steps-are _Output
+
+# Copy files as stated in the output.
+/usr/bin/smartpca -i AllEthnic_Mothers_maf05_pruned.bed -a AllEthnic_Mothers_maf05_pruned.bim/
+-b AllEthnic_Mothers_maf05_pruned.fam -p AllEthnic_Mothers_maf05_pruned.smartpca_noOutliers.par/
+-e AllEthnic_Mothers_maf05_pruned.pca_noOutliers.eval -o AllEthnic_Mothers_maf05_pruned.pca_noOutliers.pca/
+-q NO -l AllEthnic_Mothers_maf05_pruned.pca_noOutliers.log
+
