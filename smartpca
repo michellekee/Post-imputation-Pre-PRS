@@ -3,7 +3,7 @@
 # Edit run_smartpca.bash as needed, then run script.
 sudo ./run_smartpca.bash ~/Directory-where-prev-steps-are _Output
 
-# Copy files as stated in the output.
+# No outliers removed.
 /usr/bin/smartpca -i  ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.bed /
                   -a ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.bim /
                   -b ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.fam /
@@ -12,4 +12,15 @@ sudo ./run_smartpca.bash ~/Directory-where-prev-steps-are _Output
                   -e ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_noOutlers.eval /
                   -l ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_noOutliers.log /
                   -m 0 -t 0 -s 0
-
+                  
+                  
+                  
+# Remove outliers. 
+/usr/bin/smartpca -i  ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.bed /
+                  -a ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.bim /
+                  -b ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned.fam /
+                  -o ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_OutliersOut.pca /
+                  -p ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_OutliersOut.plot /
+                  -e ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_OutliersOut.eval /
+                  -l ~/PRS/Mother/Mothers_maf05_noOutliers/AllEthnic_Mothers_maf05_pruned_OutliersOut.log /
+                  -m 5 -t 2 -s 6
